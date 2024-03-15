@@ -21,27 +21,27 @@
                 <input type="text" placeholder="Digite seu nome" value="" id="name" required>
                 <button type="button" class="btn_default" onclick="presencaConfirmada()">Confirmar</button>
             </div>
-            <div class="content_input_acompanhantes" id="tem_acompanhante">
+            <!-- <div class="content_input_acompanhantes" id="tem_acompanhante">
                 <div>Tem acompanhantes?</div>
                 <div style="margin-top: 10px;">
                     <button class="btn_default" onclick="confirmarAcompanhantes(true)">Sim</button>
                     <button class="btn_default" onclick="confirmarAcompanhantes(false)">Não</button>
                 </div>
-            </div>
-            <div class="content_input_acompanhantes" id="nome_acompanhante_content">
+            </div> -->
+            <!-- <div class="content_input_acompanhantes" id="nome_acompanhante_content">
                 <div style="display: flex;justify-content: center;"><span>Acompanhante </span><input type="text" id="nome_acompanhante" style="margin-left: 10px; border: 1px solid;" placeholder="Digite o nome"></div>
                 <div style="margin-top: 10px; display: flex;justify-content: space-between; width: 100%;">
                     <button class="btn_default" onclick="definirAcompanhantes('nome_acompanhante')">Adicionar</button>
                     <button class="btn_default" onclick="confirmarAcompanhantes(false)">OK</button>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>
     <div class="content_presenca_confirmada">
         <div id="content_text"></div>
-        <div style="margin-top: 15px; color: #a1c01c;" onclick="listaAcompanhantes()" class="btn_lista">Ver acompanhantes</div>
-        <div style="display: none; margin-top: 15px; color: #a1c01c;" class="btn_convidado" onclick="confirmarAcompanhantes(false)">Voltar</div>
+        <!-- <div style="margin-top: 15px; color: #a1c01c;" onclick="listaAcompanhantes()" class="btn_lista">Ver acompanhantes</div> -->
+        <!-- <div style="display: none; margin-top: 15px; color: #a1c01c;" class="btn_convidado" onclick="confirmarAcompanhantes(false)">Voltar</div> -->
 </div>
 
     <style>
@@ -143,10 +143,10 @@
         }
     </style>
     <script>
-        let acompanhantes = []
+        // let acompanhantes = []
         let convidado_nome = ''
         const convidado = document.querySelector('.content_inputs')
-        const tem_acompanhante = document.getElementById('tem_acompanhante')
+        // const tem_acompanhante = document.getElementById('tem_acompanhante')
         const element_text = document.getElementById('content_text')
         const content_informacoes = document.querySelector('.content')
         const presencaConfirmadaContent = document.querySelector('.content_presenca_confirmada')
@@ -157,50 +157,50 @@
             element.style.display = 'flex'
         }
 
-        function presencaConfirmada(){
-            convidado.style.display = 'none'
-            tem_acompanhante.style.display = 'flex'
-        }
+        // function presencaConfirmada(){
+        //     
+        //     // tem_acompanhante.style.display = 'flex'
+        // }
 
-        function confirmarAcompanhantes(confirmar){
-            if(confirmar){
-                document.getElementById('tem_acompanhante').style.display = 'none'
-                document.getElementById('nome_acompanhante_content').style.display = 'flex'
-            }else {
-                document.querySelector('.btn_convidado').style.display = 'none'
-                document.querySelector('.btn_lista').style.display = 'block'
-
+        function presencaConfirmada(confirmar){
+            // if(confirmar){
+            //     document.getElementById('tem_acompanhante').style.display = 'none'
+            //     document.getElementById('nome_acompanhante_content').style.display = 'flex'
+            // }else {
+                // document.querySelector('.btn_convidado').style.display = 'none'
+                // document.querySelector('.btn_lista').style.display = 'block'
+                convidado.style.display = 'none'
                 convidado_nome = convidado_nome ? convidado_nome : document.getElementById('name').value
                 element_text.textContent = 'Aguardamos sua presença ' + convidado_nome
                 content_informacoes.style.display = 'none'
                 presencaConfirmadaContent.style.display = 'flex'
-            }
+            // }
 
-            if(convidado_nome || acompanhantes)
+            if(convidado_nome)
                 sendMail()
         }
 
-        function definirAcompanhantes(id){
-            const nome = document.getElementById(id)
-            acompanhantes.push(nome.value)
-            window.alert(nome.value + ' adicionado')
-            nome.value = ''
-        }
+        // function definirAcompanhantes(id){
+        //     const nome = document.getElementById(id)
+        //     acompanhantes.push(nome.value)
+        //     window.alert(nome.value + ' adicionado')
+        //     nome.value = ''
+        // }
 
-        function listaAcompanhantes(){
-            const content_text = document.getElementById('content_text')
-            document.querySelector('.btn_convidado').style.display = 'block'
-            document.querySelector('.btn_lista').style.display = 'none'
-            content_text.innerHTML = ''
-            for(let i in acompanhantes){
-                content_text.innerHTML += `<div style="margin-top:5px;">${acompanhantes[i]}</div>`
-            }
-        }
+        // function listaAcompanhantes(){
+        //     const content_text = document.getElementById('content_text')
+        //     document.querySelector('.btn_convidado').style.display = 'block'
+        //     document.querySelector('.btn_lista').style.display = 'none'
+        //     content_text.innerHTML = ''
+        //     for(let i in acompanhantes){
+        //         content_text.innerHTML += `<div style="margin-top:5px;">${acompanhantes[i]}</div>`
+        //     }
+        // }
         
         function sendMail(){
             const data = {
                 convidado: convidado_nome,
-                acompanhantes: acompanhantes
+                // acompanhantes: acompanhantes
             }
             $.ajax({
                     type: "POST",

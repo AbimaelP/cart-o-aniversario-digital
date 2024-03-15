@@ -16,15 +16,31 @@ $mail->Password   = "zFSDAcxvzxakSADF243129128APOSPQQXX";
 $mail->From = 'abimael.stack@hotmail.com';
 $mail->FromName = 'abimael.stack@hotmail.com';
 $mail->Subject = ('nenhum assunto');
+$message = '';
+
+if($dados_json['lista_convidados'])
+{
+    $contents = file_get_contents('listaConvidados.txt');
+
+    $contents = explode(',', $contents);
+
+    foreach($contents as $content){
+        $message .= "<br/>".$content.",";
+    }
+}
+else
+{
 $message = '<div>Convidado: '.$dados_json['convidado'].'</div>';
 
-if($dados_json['acompanhantes']){
-    $message .= '<div>Acompanhantes: </div>';
-    $message .= implode(", ", $dados_json['acompanhantes']);
+    function registrarConvidado($convidado){
+        file_put_contents('listaConvidados.txt', $convidado . ",", FILE_APPEND) ;
+    }
+
+    registrarConvidado($dados_json['convidado']);
 }
 
 $mail->MsgHTML($message);
 $mail->AddAddress('a.bimael2000@hotmail.com','a.bimael2000@hotmail.com');
 $success = $mail->Send();
-echo json_encode($success);
+echo json_encode($message);
     
