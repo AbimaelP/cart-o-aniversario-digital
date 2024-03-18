@@ -40,7 +40,7 @@ $message = '<div>Convidado: '.$dados_json['convidado'].'</div>';
 }
 
 $mail->MsgHTML($message);
-$mail->AddAddress('a.bimael2000@hotmail.com','a.bimael2000@hotmail.com');
+$mail->AddAddress('lyannamarquesvasconcelos@gmail.com','lyannamarquesvasconcelos@gmail.com');
 $success = $mail->Send();
 echo json_encode($message);
     
