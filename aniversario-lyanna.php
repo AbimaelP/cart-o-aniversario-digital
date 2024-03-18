@@ -12,7 +12,7 @@
 <body>
     
     <div class="content">
-        <img src="conviter11.png" alt="convite" class="bg_convite">
+        <img src="conviter09.png" alt="convite" class="bg_convite">
         <div class="button_content">
             <button type="button" class="btn_convite" onclick="confirmarPresenca()">CONFIRMAR PRESENÇA</button>
         </div>
